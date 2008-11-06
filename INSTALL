@@ -1,0 +1,57 @@
+
+This module is built and installed using the standard GNU build
+process.  It depends on the GNU build tools, PAM, openssl, and the
+Boost STL library.
+
+From the command-line:
+
+$ ./configure
+$ make
+$ sudo make install
+
+You then need to configure your PAM stack to use the HOTP module for
+authorization.  In the /etc/pam.d/ directory you will find a list of
+programs which use PAM.  If, for instance, you would like to use this
+in conjunction with SSH, you'd edit the file /etc/pam.d/sshd -- which
+should already exist.  Just above the line:
+
+@include common-auth
+
+...you would add the line:
+
+auth       sufficient   pam_hotp.so
+
+This means that when sshd calls out to the PAM stack for
+authorization, the hotp module will be used before the standard
+password-based authorization module.  Here we have listed it as
+"sufficient," which means that should the authorization succeed it
+will be considered successful, but if it fails it will continue on
+with the rest of the PAM stack to try and find a success.  This means
+that at any time you can use a OTP credential or your password.
+
+Once you have PAM configured, you need to setup the HOTP credentials
+for the users you would like to make it available for.  The program
+"hotpadd" should have been installed into /usr/local/bin/ and should
+be run as such:
+
+$ sudo hotpadd <username> <pin>
+
+...where username is the name of the user that you want to have HOTP
+access, and pin is an arbitrary-length pin number for that user's
+credentials.  hotpadd should then print a result like:
+
+$ sudo hotpadd someUser 1234
+Added someUser with key:
+94102985ae8690d28348702459ef4057
+$
+
+The key printed here needs to be installed on the user's device.  The
+best way to do it is to read it off the screen here and type it in
+directly when the Android-based client software prompts you for it.
+This is the only time that you'll have to enter the key.  After that,
+you'll just need to enter the PIN each time you want an OTP.
+
+At this point, you should be ready to go.
+
+Send questions, comments, concerns, suggestions to
+moxie@thoughtcrime.org 

@@ -1,0 +1,51 @@
+	
+This PAM  module is designed to provide two-factor authentication
+support, based on an algorithm outlined in RFC 4226
+<http://www.rfc-editor.org/rfc/rfc4226.txt> known as HOTP.  
+
+The basic problem is this: one might occasionally find it necessary to
+access email or get a remote shell from a computer that is one's
+own. The problem, however, is that it's often unwise to trust
+computers that are not your own. This is particularly true for public
+computers at libraries or internet cafes, which are a tempting option
+when traveling.
+
+There are solutions for this, of course. The two obvious choices are a
+One Time Password system (like S/Key or OTPW) or a Two Factor
+Authentication system (like RSA SecureID or CryptoCard). I prefer Two
+Factor Authentication. What I don't like about OTP is that you have to
+carry a list of passwords around with you, that there can be
+logistical problems if you get to the end of your list while you're
+still traveling, and that you have to type your constant "prefix"
+password into untrusted computers. What I like about Two Factor
+Authentication is that you have the security of two factors (something
+you have and something you know) and that it solves the keystroke
+logging problem in a more convenient way (no lists, no out of date
+information, no typing of anything but a temporary access code into
+untrusted computers).
+
+Ironically, then, the problem with SecureID or CryptoCard is that
+they're not convenient. They cost money to license, the hardware costs
+money, and they're difficult to maintain. You have to setup a
+dedicated Solaris machine with RADIUS support just to deploy SecureID,
+which isn't really great for someone with a small setup.
+
+And that's why this exists. It's an implementation of the HOTP
+protocol in the form of a PAM module. Basically, in addition to a
+normal password, users are also assigned a 20 byte key and
+arbitrary-length PIN number. Every time you'd like to login using a
+OTP, you calculate a secure hash based on your assigned PIN and an
+increasing counter, the result of which is a six character one time
+password.
+
+This module goes above the normal authentication module in the PAM
+stack, so at any moment you can either use your normal password or a
+OTP interchangeably.
+
+While this module could be used in conjunction with many different
+client devices, it was written specifically with Android devices in
+mind.  There is companion software which runs on Android, so that your
+phone essentially becomes a SecureID token.  All you need to do is
+open up the software, type in your PIN, and you get back a 6-character
+number that you can use to login to your system.
+
