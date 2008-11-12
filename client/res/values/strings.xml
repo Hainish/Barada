@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter_pin">Enter Pin:</string>
+    <string name="app_name">Barada</string>
+<string name="password">One Time Password</string>
+<string name="generate">Generate</string>
+<string name="invalid_pin_text">Invalid Pin</string>
+<string name="password_dialog_title">Current Password</string>
+<string name="non_integer_pin">pin must be a number</string>
+<string name="new_key">Reset Secret Key</string>
+<string name="key_gen_check_title">Set New Key?</string>
+<string name="key_gen_check_message">Are you sure you want to set a new secret key?  This will erase your current secret key!</string>
+<string name="new_key_confirm">Set New Key</string>
+<string name="enter_key">Enter New Key:</string>
+<string name="new_key_cancel">Cancel</string>
+</resources>
