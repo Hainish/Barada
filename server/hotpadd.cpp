@@ -22,7 +22,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
-#include <boost/filesystem.hpp>
+#include <boost/filesystem/operations.hpp>
 #include <boost/lexical_cast.hpp>
 #include <openssl/rand.h>
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 
   if (is_directory(path(DEFAULT_PATH) / argv[1])) {
     fprintf(stderr, "Error: User Already Exists in HOTP System...\n");
-    return 0;
+    //    return 0;
   }
 
   unsigned char key[KEY_SIZE];

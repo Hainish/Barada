@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.android.crypt.otp;
+package com.android.crypt.barada;
 
 public final class R {
     public static final class attr {
