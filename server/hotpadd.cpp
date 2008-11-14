@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 
   if (is_directory(path(DEFAULT_PATH) / argv[1])) {
     fprintf(stderr, "Error: User Already Exists in HOTP System...\n");
-    //    return 0;
+    return 0;
   }
 
   unsigned char key[KEY_SIZE];
