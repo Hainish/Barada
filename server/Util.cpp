@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define DEBUG 0
 
 void Util::int64ToArrayBigEndian(unsigned char *a, uint64_t i) {
   a[0] = (i >> 56) & 0xFF;

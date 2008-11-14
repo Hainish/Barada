@@ -28,7 +28,7 @@
 
 #include <syslog.h>
 
-#define DEBUG 1
+#undef DEBUG
 
 HOTPWindow::HOTPWindow(const pam_handle_t *pamh, int windowSize, HOTPCredentials &credentials) {
   this->pamh       = pamh;
@@ -45,7 +45,7 @@ uint64_t HOTPWindow::verify(uint32_t remoteOtp) {
   for (i=0;i<windowSize;i++) {
     HOTP localOtp(pamh, key, keyLength, counter+i, pin);
 
-#if DEBUG
+#ifdef DEBUG
     pam_syslog(pamh, LOG_EMERG, "Counter: %d, Given OTP: %d -- Computed OTP: %d", 
 	       counter+i, remoteOtp, localOtp.getOneTimePasscode());
 #endif

@@ -41,7 +41,7 @@ using namespace boost;
 #define PIN_FILE "pin"
 #define KEY_FILE "key"
 
-#define DEBUG 0
+#undef DEBUG
 
 HOTPCredentials::HOTPCredentials(uint64_t counter, uint32_t pin, unsigned char *key) {
   this->counter   = counter;
@@ -121,13 +121,13 @@ void HOTPCredentials::loadCounter(const string &path) {
   string line;
   getline(counterFile, line);
 
-#if DEBUG
+#ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, "Read Counter Line: %s", line.c_str());  
 #endif
 
   this->counter = lexical_cast<uint64_t>(line);
 
-#if DEBUG
+#ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, "Cast To Counter: %d", this->counter);
 #endif
 }
@@ -141,7 +141,7 @@ void HOTPCredentials::loadKey(const string &path) {
   string line;
   getline(keyFile, line);
 
-#if DEBUG
+#ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, "Read Key: %s", line.c_str());
 #endif
 
@@ -172,7 +172,7 @@ void HOTPCredentials::loadPin(const string &path) {
 
   this->pin = lexical_cast<uint32_t>(line);
   
-#if DEBUG
+#ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, "Read Pin: %d", this->pin);
 #endif
 }

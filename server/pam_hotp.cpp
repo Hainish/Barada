@@ -33,7 +33,7 @@
 
 #define DEFAULT_PATH "/etc/hotp.d/"
 
-#define DEBUG 0
+#undef DEBUG
 
 using namespace std;
 using namespace boost;
@@ -119,7 +119,9 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags,
     return PAM_USER_UNKNOWN;
   }
 
+#ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, ("Got Login: " + login).c_str());
+#endif
 
   if ((passcode = getPasscode(pamh)) == 0) {
     pam_syslog(pamh, LOG_EMERG, "HOTP: Unable To Get Passcode...");

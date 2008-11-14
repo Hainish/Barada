@@ -28,7 +28,7 @@
 #include <security/pam_ext.h>
 #include <syslog.h>
 
-#define DEBUG 0
+#undef DEBUG
 #define HMAC_SIZE 20
 #define OFFSET_BYTE 19
 
@@ -44,7 +44,7 @@ HOTP::HOTP(const pam_handle_t *pamh, const unsigned char *key,
   Util::int32ToArrayBigEndian(pinActivatedKey + keyLength, pin);
 
 
-#if DEBUG
+#ifdef DEBUG
   for (int i=0;i<pinActivatedKeyLength;i++) {
     pam_syslog(pamh, LOG_EMERG, "Key[%d]: %x", i, pinActivatedKey[i]);
   }
@@ -57,7 +57,7 @@ HOTP::HOTP(const pam_handle_t *pamh, const unsigned char *key,
   HMAC(EVP_sha1(), pinActivatedKey, pinActivatedKeyLength, 
        counterData, sizeof(counterData), hmac, NULL);
 
-#if DEBUG
+#ifdef DEBUG
   for (int i=0;i<sizeof(hmac);i++) {
     pam_syslog(pamh, LOG_EMERG, "HMAC[%d]: %d", i, hmac[i]);
   }
@@ -65,7 +65,7 @@ HOTP::HOTP(const pam_handle_t *pamh, const unsigned char *key,
 
   otp = truncate(hmac);
 
-#if DEBUG
+#ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, "OTP Calculated: %d", otp);
 #endif
 

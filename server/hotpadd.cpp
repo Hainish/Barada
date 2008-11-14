@@ -56,6 +56,7 @@ int main(int argc, char **argv) {
     return 0;
   }
 
+  create_directory(path(DEFAULT_PATH));
   create_directory(path(DEFAULT_PATH) / argv[1]);
 
   HOTPCredentials credentials(1, lexical_cast<uint32_t>(argv[2]), key);
