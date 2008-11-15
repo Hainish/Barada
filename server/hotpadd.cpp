@@ -23,6 +23,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/exception.hpp>
 #include <boost/lexical_cast.hpp>
 #include <openssl/rand.h>
 
@@ -44,9 +45,14 @@ int main(int argc, char **argv) {
 
   if (argc < 3) return printUsage(argv[0]);
 
+  try {
   if (is_directory(path(DEFAULT_PATH) / argv[1])) {
     fprintf(stderr, "Error: User Already Exists in HOTP System...\n");
     return 0;
+  }
+  }
+  catch( filesystem_error err ) {
+    //This is the desired behavior (the user dir does not yet exist)
   }
 
   unsigned char key[KEY_SIZE];
@@ -64,10 +70,11 @@ int main(int argc, char **argv) {
 
   cout << "Added " << argv[1] << " with key:" << endl;
 
-  int i;
+  unsigned int i;
   for (i=0;i<sizeof(key);i++) {
-    cout << hex << (uint32_t)key[i];
+    printf( "%2x", (uint32_t)key[i] );
+    //cout << hex << (uint32_t)key[i];
   }
-
-  cout << hex << endl;
+  printf( "\n" );
+  //  cout << hex << endl;
 }
