@@ -1,8 +1,14 @@
 #include "Util.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
-#define DEBUG 0
+#include <openssl/rand.h>
+#include <boost/assert.hpp>
+
+#undef DEBUG
 
 void Util::int64ToArrayBigEndian(unsigned char *a, uint64_t i) {
   a[0] = (i >> 56) & 0xFF;
@@ -31,7 +37,36 @@ void Util::hexDump(const pam_handle_t *pamh, unsigned char *buf, int length) {
   }
 
   pam_syslog(pamh, LOG_EMERG, output);
+
   free(output);
 }
 
+void Util::hexStringToChar(unsigned char *buffer, int len, std::string &hexString) {
+  assert(hexString.length() / 2 == len);
 
+  char nibble[9];
+  nibble[8] = '\0';
+
+  uint32_t nibbleConversion;
+
+  for (int i=0;i<len/4;i++) {
+    memcpy(nibble, hexString.c_str()+(i*8), 8);
+    sscanf(nibble, "%x", &nibbleConversion);
+    Util::int32ToArrayBigEndian(buffer+(i*4), nibbleConversion);
+  }
+
+  memset(nibble, 0, sizeof(nibble));
+  nibbleConversion = 0;
+}
+
+std::string Util::charToHexString(const unsigned char* buffer, size_t size) {
+  std::stringstream str;
+  str.setf(std::ios_base::hex, std::ios::basefield);
+  str.fill('0');
+
+  for (size_t i=0;i<size;++i) {
+    str << std::setw(2) << (unsigned short)(unsigned char)buffer[i];
+  }
+
+  return str.str();
+}

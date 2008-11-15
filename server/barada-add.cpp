@@ -27,7 +27,10 @@
 #include <boost/lexical_cast.hpp>
 #include <openssl/rand.h>
 
+#include <sys/stat.h>
+
 #include "HOTPCredentials.h"
+#include "Util.h"
 
 #define KEY_SIZE 16
 #define DEFAULT_PATH "/etc/hotp.d/"
@@ -46,35 +49,32 @@ int main(int argc, char **argv) {
   if (argc < 3) return printUsage(argv[0]);
 
   try {
-  if (is_directory(path(DEFAULT_PATH) / argv[1])) {
-    fprintf(stderr, "Error: User Already Exists in HOTP System...\n");
-    return 0;
-  }
-  }
-  catch( filesystem_error err ) {
+    if (is_directory(path(DEFAULT_PATH) / argv[1])) {
+      fprintf(stderr, "Error: Barada user already exists...\n");
+      return 0;
+    }
+  } catch( filesystem_error err ) {
     //This is the desired behavior (the user dir does not yet exist)
   }
 
   unsigned char key[KEY_SIZE];
 
-  if (!(RAND_bytes(key, KEY_SIZE))) {
+  if (!(RAND_bytes(key, sizeof(key)))) {
     fprintf(stderr, "Error: Not enough entropy available to generate key.  Try again later.\n");
     return 0;
   }
 
   create_directory(path(DEFAULT_PATH));
+  chmod(DEFAULT_PATH, S_IRUSR | S_IWUSR);
+
   create_directory(path(DEFAULT_PATH) / argv[1]);
+  chmod((string(DEFAULT_PATH) + "/" + argv[1]).c_str(), S_IRUSR | S_IWUSR);
 
   HOTPCredentials credentials(1, lexical_cast<uint32_t>(argv[2]), key);
   credentials.serialize(string(DEFAULT_PATH) + "/" + argv[1]);
 
   cout << "Added " << argv[1] << " with key:" << endl;
 
-  unsigned int i;
-  for (i=0;i<sizeof(key);i++) {
-    printf( "%02x", (uint32_t)key[i] );
-    //cout << hex << (uint32_t)key[i];
-  }
-  printf( "\n" );
-  //  cout << hex << endl;
+  std::string keyString = Util::charToHexString(key, sizeof(key));
+  cout << keyString << endl;
 }

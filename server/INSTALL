@@ -3,13 +3,24 @@ This module is built and installed using the standard GNU build
 process.  It depends on the GNU build tools, PAM, openssl, and the
 Boost STL library.
 
-From the command-line:
+Installing a source release from the command-line:
 
 $ ./configure
 $ make
 $ sudo make install
 
-You then need to configure your PAM stack to use the HOTP module for
+Building the source from the SVN repository:
+
+$ svn co http://barada.sourceforge.net/svnroot/barada barada
+$ cd barada/server/
+$ aclocal
+$ automake -a
+$ autoconf
+$ ./configure
+$ make
+$ sudo make install
+
+You then need to configure your PAM stack to use the Barada module for
 authorization.  In the /etc/pam.d/ directory you will find a list of
 programs which use PAM.  If, for instance, you would like to use this
 in conjunction with SSH, you'd edit the file /etc/pam.d/sshd -- which
@@ -19,7 +30,7 @@ should already exist.  Just above the line:
 
 ...you would add the line:
 
-auth       sufficient   pam_hotp.so
+auth       sufficient   pam_barada.so
 
 This means that when sshd calls out to the PAM stack for
 authorization, the hotp module will be used before the standard
@@ -29,18 +40,18 @@ will be considered successful, but if it fails it will continue on
 with the rest of the PAM stack to try and find a success.  This means
 that at any time you can use a OTP credential or your password.
 
-Once you have PAM configured, you need to setup the HOTP credentials
+Once you have PAM configured, you need to setup the Barada credentials
 for the users you would like to make it available for.  The program
-"hotpadd" should have been installed into /usr/local/bin/ and should
+"barada-add" should have been installed into /usr/local/bin/ and should
 be run as such:
 
-$ sudo hotpadd <username> <pin>
+$ sudo barada-add <username> <pin>
 
-...where username is the name of the user that you want to have HOTP
+...where username is the name of the user that you want to have Barada
 access, and pin is an arbitrary-length pin number for that user's
 credentials.  hotpadd should then print a result like:
 
-$ sudo hotpadd someUser 1234
+$ sudo barada-add someUser 1234
 Added someUser with key:
 94102985ae8690d28348702459ef4057
 $

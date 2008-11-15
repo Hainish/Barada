@@ -2,16 +2,20 @@ AM_CXXFLAGS = -Wall -fPIC -ggdb
 
 noinst_HEADERS = HOTPCredentials.h HOTPWindow.h HOTP.h Util.h 
 
-bin_PROGRAMS = hotpadd
+noinst_PROGRAMS = HexTest
 
-hotpadd_SOURCES = hotpadd.cpp HOTPCredentials.cpp Util.cpp
+bin_PROGRAMS = barada-add
 
-hotpadd_LDFLAGS = -lboost_filesystem
+barada_add_SOURCES = barada-add.cpp HOTPCredentials.cpp Util.cpp
 
-pam_hotp_sodir = /lib/security/
+barada_add_LDFLAGS = -lboost_filesystem
 
-pam_hotp_so_PROGRAMS = pam_hotp.so
+pam_barada_sodir = /lib/security/
 
-pam_hotp_so_SOURCES = HOTP.cpp HOTPCredentials.cpp HOTPWindow.cpp pam_hotp.cpp Util.cpp 
+pam_barada_so_PROGRAMS = pam_barada.so
 
-pam_hotp_so_LDFLAGS = -shared
+pam_barada_so_SOURCES = HOTP.cpp HOTPCredentials.cpp HOTPWindow.cpp pam_barada.cpp Util.cpp 
+
+pam_barada_so_LDFLAGS = -shared
+
+HexTest_SOURCES = HexTest.cpp Util.cpp

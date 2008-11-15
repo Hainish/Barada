@@ -33,6 +33,7 @@
 
 #include <syslog.h>
 #include <string.h>
+#include <sys/stat.h>
 
 using namespace std;
 using namespace boost;
@@ -88,19 +89,18 @@ void HOTPCredentials::serializePin(const string &path) {
 
   pinFile << this->pin << endl;
   pinFile.close();
+
+  chmod(pinPath.c_str(), S_IRUSR | S_IWUSR);
 }
 
 void HOTPCredentials::serializeKey(const string &path) {
   string keyPath = path + "/" + KEY_FILE;
   ofstream keyFile(keyPath.c_str());
-  uint32_t i;
 
-  for (i=0;i<sizeof(key);i++) {
-    keyFile << hex << (uint32_t)key[i];
-  }
-
-  keyFile << hex << endl;
+  string keyString = Util::charToHexString(key, sizeof(key));
+  keyFile << keyString << endl;
   keyFile.close();
+  keyString.clear();
 }
 
 void HOTPCredentials::serializeCounter(const string &path) {
@@ -109,6 +109,8 @@ void HOTPCredentials::serializeCounter(const string &path) {
 
   counterFile << this->counter << endl;
   counterFile.close();
+
+  chmod(counterPath.c_str(), S_IRUSR | S_IWUSR);
 }
 
 void HOTPCredentials::loadCounter(const string &path) {
@@ -145,19 +147,7 @@ void HOTPCredentials::loadKey(const string &path) {
   pam_syslog(pamh, LOG_EMERG, "Read Key: %s", line.c_str());
 #endif
 
-  char nibble[9];
-  nibble[8] = '\0';
-
-  uint32_t nibbleConversion;
-
-  for (int i=0;i<sizeof(key)/4;i++) {
-    memcpy(nibble, line.c_str()+(i*8), 8);
-    sscanf(nibble, "%x", &nibbleConversion);
-    Util::int32ToArrayBigEndian(key+(i*4), nibbleConversion);
-  }
-
-  memset(nibble, 0, sizeof(nibble));
-  nibbleConversion = 0;
+  Util::hexStringToChar(key, sizeof(key), line);
   line.clear();
 }
 
