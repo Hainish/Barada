@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
 
   unsigned int i;
   for (i=0;i<sizeof(key);i++) {
-    printf( "%2x", (uint32_t)key[i] );
+    printf( "%02x", (uint32_t)key[i] );
     //cout << hex << (uint32_t)key[i];
   }
   printf( "\n" );
