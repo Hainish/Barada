@@ -32,7 +32,7 @@ which isn't really great for someone with a small setup.
 
 And that's why this exists. It's an implementation of the HOTP
 protocol in the form of a PAM module. Basically, in addition to a
-normal password, users are also assigned a 20 byte key and
+normal password, users are also assigned a 128 bit key and
 arbitrary-length PIN number. Every time you'd like to login using a
 OTP, you calculate a secure hash based on your assigned PIN and an
 increasing counter, the result of which is a six character one time
