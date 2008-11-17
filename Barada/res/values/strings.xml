@@ -11,6 +11,14 @@
 <string name="key_gen_check_title">Set New Key?</string>
 <string name="key_gen_check_message">Are you sure you want to set a new secret key?  This will erase your current secret key!</string>
 <string name="new_key_confirm">Set New Key</string>
-<string name="enter_key">Enter New Key:</string>
+<string name="enter_key">Enter Key:</string>
 <string name="new_key_cancel">Cancel</string>
+
+<string name="confirm">Save</string>
+<string name="no_profile">You must specify a profile name.</string>
+<string name="use_profile">Generate OTP</string>
+<string name="edit_profile">Edit Profile</string>
+<string name="enter_profile">Profile Name:</string>
+<string name="profile_add">Add Profile</string>
+<string name="profile_delete">Delete Profile</string>
 </resources>

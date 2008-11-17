@@ -14,21 +14,26 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int generate=0x7f050004;
-        public static final int new_key=0x7f050005;
-        public static final int new_key_cancel=0x7f050002;
-        public static final int new_key_confirm=0x7f050001;
-        public static final int new_key_text=0x7f050000;
-        public static final int pin=0x7f050003;
+        public static final int confirm=0x7f050002;
+        public static final int generate=0x7f050005;
+        public static final int new_key_text=0x7f050001;
+        public static final int new_profile_text=0x7f050000;
+        public static final int pin_text=0x7f050004;
+        public static final int profile_title=0x7f050003;
     }
     public static final class layout {
-        public static final int key_entry=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int profile_edit=0x7f030000;
+        public static final int profile_list=0x7f030001;
+        public static final int profile_row=0x7f030002;
+        public static final int profile_use=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
+        public static final int confirm=0x7f04000d;
+        public static final int edit_profile=0x7f040010;
         public static final int enter_key=0x7f04000b;
         public static final int enter_pin=0x7f040000;
+        public static final int enter_profile=0x7f040011;
         public static final int generate=0x7f040003;
         public static final int invalid_pin_text=0x7f040004;
         public static final int key_gen_check_message=0x7f040009;
@@ -36,8 +41,12 @@ public final class R {
         public static final int new_key=0x7f040007;
         public static final int new_key_cancel=0x7f04000c;
         public static final int new_key_confirm=0x7f04000a;
+        public static final int no_profile=0x7f04000e;
         public static final int non_integer_pin=0x7f040006;
         public static final int password=0x7f040002;
         public static final int password_dialog_title=0x7f040005;
+        public static final int profile_add=0x7f040012;
+        public static final int profile_delete=0x7f040013;
+        public static final int use_profile=0x7f04000f;
     }
 }

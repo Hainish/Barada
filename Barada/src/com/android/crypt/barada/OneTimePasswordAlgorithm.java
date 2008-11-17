@@ -1,8 +1,9 @@
 package com.android.crypt.barada;
 
+import android.util.Log;
+import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -88,6 +89,21 @@ public class OneTimePasswordAlgorithm {
 		//        }
 	}
 
+  private static byte[] getSecretBytes(String secretHex, long pin) {
+    byte[] secret = new byte[(secretHex.length() / 2) + 4];
+
+    BigInteger bi = new BigInteger(secretHex, 16);
+    byte[] key    = bi.toByteArray();
+
+    System.arraycopy(key, 0, secret, 0, key.length);
+    
+    for (int j=0;j<4;j++) {
+      secret[j + key.length] = (byte)((pin >> ((3 - j) * 8)) & 0xff);
+    }
+
+    return secret;
+  }
+
 	private static final int[] DIGITS_POWER
 	// 0 1  2   3    4     5      6       7        8
 	= {1,10,100,1000,10000,100000,1000000,10000000,100000000};
@@ -121,13 +137,18 @@ public class OneTimePasswordAlgorithm {
 	 * {@link codeDigits} digits plus the optional checksum
 	 * digit if requested.
 	 */
-	static public String generateOTP(byte[] secret,
-			long movingFactor,
-			int codeDigits,
-			boolean addChecksum,
-			int truncationOffset)
+	static public String generateOTP(String secretHex,
+					 long pin,
+					 long movingFactor,
+					 int codeDigits,
+					 boolean addChecksum,
+					 int truncationOffset)
 	throws NoSuchAlgorithmException, InvalidKeyException
 	{
+	  byte[] secret = getSecretBytes(secretHex, pin);
+
+	  Log.w("Barada", "Secret Bytes: " + Hex.toString(secret));	  
+
 		// put movingFactor value into text byte array
 		String result = null;
 		int digits = addChecksum ? (codeDigits + 1) : codeDigits;
