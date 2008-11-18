@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content"
+                android:padding="10px">
 	
-  <TextView android:layout_width="wrap_content"
+  <TextView android:id="@+id/header"
+	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/use_profile" />
+	    android:text="@string/edit_profile" 
+	    android:textSize="@dimen/header_text" />
 
-  <LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-    <TextView android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:text="@string/enter_profile"/>
+  <TextView android:id="@+id/profile_label"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+	    android:text="@string/enter_profile"/>
     
-    <EditText android:id="@+id/new_profile_text" 
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content" 
-	      android:layout_weight="1"/>
-  </LinearLayout>
+  <EditText android:id="@+id/new_profile_text" 
+	    android:layout_below="@id/profile_label"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_weight="1"/>
 
-
-  <LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-    <TextView android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:text="@string/enter_key"/>
-    
-    <EditText android:id="@+id/new_key_text" 
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content" 
-	      android:layout_weight="1"/>
-  </LinearLayout>
+  <TextView android:id="@+id/key_label"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/new_profile_text"
+	    android:text="@string/enter_key"/>
+  
+  <EditText android:id="@+id/new_key_text" 
+	    android:layout_below="@id/key_label"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_weight="1"/>
 
   <Button android:id="@+id/confirm"
+	  android:layout_below="@id/new_key_text"
 	  android:text="@string/confirm"
 	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content" />
+	  android:layout_height="wrap_content" 
+          android:layout_alignParentRight="true" />
 
-</LinearLayout>
+  <Button android:id="@+id/cancel"
+          android:layout_toLeftOf="@id/confirm"
+          android:layout_alignTop="@id/confirm"
+	  android:text="@string/cancel"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content" />	  
+
+</RelativeLayout>

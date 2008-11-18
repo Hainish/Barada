@@ -36,6 +36,7 @@ public class ProfileEdit extends Activity {
   private EditText profileText;
   private EditText keyText;
   private Button confirmButton;
+  private Button cancelButton;
 
   private BaradaDatabase helper;
   private Long rowId;
@@ -51,10 +52,11 @@ public class ProfileEdit extends Activity {
     profileText   = (EditText)findViewById(R.id.new_profile_text);
     keyText       = (EditText)findViewById(R.id.new_key_text);
     confirmButton = (Button)findViewById(R.id.confirm);
+    cancelButton  = (Button)findViewById(R.id.cancel);
     rowId         = getRowId(savedInstanceState);
 
     populateFields();
-    registerConfirmClick(confirmButton);
+    registerClick(confirmButton, cancelButton);
   }
 
   private void populateFields() {
@@ -75,16 +77,6 @@ public class ProfileEdit extends Activity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putLong(BaradaDatabase.ID, rowId);
-  }
-
-  protected void onPause() {
-    super.onPause();
-    saveState();
-  }
-
-  protected void onResume() {
-    super.onResume();
-    populateFields();
   }
 
   private void saveState() {
@@ -132,16 +124,25 @@ public class ProfileEdit extends Activity {
       isKeyFieldValid();
   }
 
-  private void registerConfirmClick(Button confirm) {
+  private void registerClick(Button confirm, Button cancel) {
     confirm.setOnClickListener(new View.OnClickListener() {
 	public void onClick(View view) {
 	  if (checkFields()) {
+	    saveState();
 	    setResult(RESULT_OK);
 	    finish();
 	  }
 	}
       });
+
+    cancel.setOnClickListener(new View.OnClickListener() {
+	public void onClick(View view) {
+	  setResult(RESULT_CANCELED);
+	  finish();
+	}
+      });
   }
+
 
   private Long getRowId(Bundle savedInstanceState) {
     Long rowId = null;

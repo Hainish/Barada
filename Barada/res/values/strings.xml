@@ -14,10 +14,11 @@
 <string name="enter_key">Enter Key:</string>
 <string name="new_key_cancel">Cancel</string>
 
+<string name="cancel">Cancel</string>
 <string name="confirm">Save</string>
 <string name="no_profile">You must specify a profile name.</string>
 <string name="use_profile">Generate OTP</string>
-<string name="edit_profile">Edit Profile</string>
+<string name="edit_profile">Add/Edit Profile</string>
 <string name="enter_profile">Profile Name:</string>
 <string name="profile_add">Add Profile</string>
 <string name="profile_delete">Delete Profile</string>
