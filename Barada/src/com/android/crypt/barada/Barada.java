@@ -1,7 +1,6 @@
 package com.android.crypt.barada;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -48,6 +47,8 @@ public class Barada extends ListActivity {
 
     helper = new BaradaDatabase(this);
     helper.open();
+    
+    new Migrator( this, helper );
     
     redrawList();
   }
