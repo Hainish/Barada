@@ -59,5 +59,6 @@ public final class R {
         public static final int profile_add=0x7f050013;
         public static final int profile_delete=0x7f050014;
         public static final int use_profile=0x7f050010;
+        public static final int version_name=0x7f050015;
     }
 }

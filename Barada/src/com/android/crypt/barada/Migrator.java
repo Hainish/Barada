@@ -14,7 +14,8 @@ public class Migrator {
 	private final String COUNTER_FILENAME = "counter";
 	private Activity ctx;
 	
-	public Migrator( Activity ctx, BaradaDatabase db ) {
+	public Migrator( Activity _ctx, BaradaDatabase db ) {
+		ctx = _ctx;
 		int count = load_counter();
 		
 		if( count == -1 ) //file didn't exist, we don't need to migrate
@@ -25,8 +26,8 @@ public class Migrator {
 		long row_id = db.createProfile( "default", Hex.toString(key) );
 		db.updateCounter( row_id, count );
 		
-		ctx.deleteFile(COUNTER_FILENAME);
-		ctx.deleteFile(KEY_FILENAME);
+		boolean del_success = ctx.deleteFile(COUNTER_FILENAME);
+		boolean del2_success = ctx.deleteFile(KEY_FILENAME);
 	}
 	
 	 private int load_counter() {
@@ -41,6 +42,7 @@ public class Migrator {
                  }
                  counter = (data[0] << 24) | ((data[1] & 0xff) << 16)
                                  | ((data[2] & 0xff) << 8) | (data[3] & 0xff);
+                 input.close();
          } catch (Exception e) {
         	 return -1;
          }
@@ -62,6 +64,7 @@ public class Migrator {
                          }
                          bytes_read += n_read;
                  } while (bytes_read < Barada.KEY_LENGTH);
+                 input.close();
          } catch (Exception e) {
                  return null;
          }
