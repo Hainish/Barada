@@ -115,7 +115,9 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags,
   uint64_t counter;
 
   if ((login = getLogin(pamh)) == "") {
+#ifdef DEBUG
     pam_syslog(pamh, LOG_EMERG, "HOTP: Unable To Get Login...");
+#endif
     return PAM_USER_UNKNOWN;
   }
 
@@ -124,7 +126,9 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags,
 #endif
 
   if ((passcode = getPasscode(pamh)) == 0) {
+#ifdef DEBUG
     pam_syslog(pamh, LOG_EMERG, "HOTP: Unable To Get Passcode...");
+#endif
     return PAM_AUTH_ERR;
   }
 
