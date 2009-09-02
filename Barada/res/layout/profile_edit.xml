@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content"
+                android:padding="10px">
+	
+  <TextView android:id="@+id/header"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/edit_profile" 
+	    android:textSize="@dimen/header_text" />
+
+  <TextView android:id="@+id/profile_label"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+	    android:text="@string/enter_profile"/>
+    
+  <EditText android:id="@+id/new_profile_text" 
+	    android:layout_below="@id/profile_label"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_weight="1"/>
+
+  <TextView android:id="@+id/key_label"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/new_profile_text"
+	    android:text="@string/enter_key"/>
+  
+  <EditText android:id="@+id/new_key_text" 
+	    android:layout_below="@id/key_label"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_weight="1"/>
+
+  <Button android:id="@+id/confirm"
+	  android:layout_below="@id/new_key_text"
+	  android:text="@string/confirm"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content" 
+          android:layout_alignParentRight="true" />
+
+  <Button android:id="@+id/cancel"
+          android:layout_toLeftOf="@id/confirm"
+          android:layout_alignTop="@id/confirm"
+	  android:text="@string/cancel"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content" />	  
+
+</RelativeLayout>
