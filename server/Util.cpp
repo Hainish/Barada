@@ -42,7 +42,7 @@ void Util::hexDump(const pam_handle_t *pamh, unsigned char *buf, int length) {
 }
 
 void Util::hexStringToChar(unsigned char *buffer, int len, std::string &hexString) {
-  assert(hexString.length() / 2 == len);
+  assert(hexString.length() / 2 == (unsigned int)len);
 
   char nibble[9];
   nibble[8] = '\0';

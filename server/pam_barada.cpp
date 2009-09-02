@@ -151,3 +151,9 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags,
     return PAM_AUTH_ERR;
   }
 }
+int pam_sm_setcred(
+    pam_handle_t    *pamh,
+    int              flags,
+    int              argc,
+    const char     **argv
+    ){ return PAM_CRED_UNAVAIL; }
