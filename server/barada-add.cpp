@@ -33,7 +33,7 @@
 #include "Util.h"
 
 #define KEY_SIZE 16
-#define DEFAULT_PATH "/etc/hotp.d/"
+#define DEFAULT_PATH "/etc/barada.d/"
 
 using namespace std;
 using namespace boost;
@@ -41,12 +41,14 @@ using namespace boost::filesystem;
 
 int printUsage(char *name) {
   fprintf(stderr, "%s <user_name> <pin_number>\n", name);
+  fprintf(stderr, "Where <user_name> is the unix account name.\n");
+  fprintf(stderr, "Where <pin_number> is a multi-digit number.\n");
   return 0;
 }
 
 int main(int argc, char **argv) {
 
-  if (argc < 3) return printUsage(argv[0]);
+  if (argc != 3) return printUsage(argv[0]);
 
   try {
     if (is_directory(path(DEFAULT_PATH) / argv[1])) {

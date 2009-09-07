@@ -11,8 +11,10 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
-        public static final int header_text=0x7f040001;
+        public static final int header_text=0x7f040002;
+        public static final int intro_text=0x7f040001;
         public static final int row_text=0x7f040000;
+        public static final int title_text=0x7f040003;
     }
     public static final class drawable {
         public static final int icon=0x7f020000;
@@ -38,13 +40,14 @@ public final class R {
         public static final int profile_use=0x7f030003;
     }
     public static final class string {
+        public static final int about_barada=0x7f050015;
         public static final int app_name=0x7f050001;
         public static final int cancel=0x7f05000d;
         public static final int confirm=0x7f05000e;
-        public static final int edit_profile=0x7f050011;
+        public static final int edit_profile=0x7f050010;
         public static final int enter_key=0x7f05000b;
         public static final int enter_pin=0x7f050000;
-        public static final int enter_profile=0x7f050012;
+        public static final int enter_profile=0x7f050011;
         public static final int generate=0x7f050003;
         public static final int invalid_pin_text=0x7f050004;
         public static final int key_gen_check_message=0x7f050009;
@@ -56,9 +59,10 @@ public final class R {
         public static final int non_integer_pin=0x7f050006;
         public static final int password=0x7f050002;
         public static final int password_dialog_title=0x7f050005;
-        public static final int profile_add=0x7f050013;
-        public static final int profile_delete=0x7f050014;
-        public static final int use_profile=0x7f050010;
-        public static final int version_name=0x7f050015;
+        public static final int profile_add=0x7f050012;
+        public static final int profile_delete=0x7f050013;
+        public static final int use_profile=0x7f050017;
+        public static final int using_barada=0x7f050016;
+        public static final int version_name=0x7f050014;
     }
 }

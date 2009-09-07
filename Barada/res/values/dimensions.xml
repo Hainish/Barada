@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="row_text">18px</dimen>
-  <dimen name="header_text">20px</dimen>
+  <dimen name="row_text">35px</dimen>
+  <dimen name="intro_text">19px</dimen>
+  <dimen name="header_text">25px</dimen>
+  <dimen name="title_text">30px</dimen>
 </resources>

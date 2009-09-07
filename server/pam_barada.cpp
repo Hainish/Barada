@@ -31,7 +31,7 @@
 #include "HOTPCredentials.h"
 #include "HOTPWindow.h"
 
-#define DEFAULT_PATH "/etc/hotp.d/"
+#define DEFAULT_PATH "/etc/barada.d/"
 
 #undef DEBUG
 
@@ -146,6 +146,7 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags,
   if ((counter = userWindow.verify(passcode))) {
     user.setCounter(counter+1);
     user.serializeCounter(DEFAULT_PATH + login);
+    pam_syslog(pamh, LOG_INFO, "pam_barada: authentication successful for %s\n", login.c_str())
     return PAM_SUCCESS;
   } else {
     return PAM_AUTH_ERR;

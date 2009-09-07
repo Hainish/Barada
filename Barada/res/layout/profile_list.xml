@@ -6,19 +6,34 @@
 	<ListView android:id="@+id/android:list" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
 
+	<ScrollView android:id="@+id/android:empty" android:layout_height="wrap_content" android:layout_width="fill_parent">
 	<LinearLayout android:id="@+id/android:empty"
 		android:orientation="vertical" android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="Welcome to Barada!\n"
-			android:textSize="@dimen/header_text" />
+			android:textSize="@dimen/title_text" android:typeface="serif" android:layout_gravity="center_vertical|center_horizontal"/>
 
 		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="If you haven't already done so, you need to get Barada credentials for the account on the server you're trying to access.  If you manage the server yourself, see http://barada.sourceforge.net for information on downloading and installing a Barada PAM module.  Otherwise, contact your administrator about getting Barada credentials.\n\nOnce you have the Barada credentials, all you need to do here is create profile for that account and enter the 128bit Barada key you received from the server.\n\nAccessing that profile using Barada's two-factor authentication from then on is as simple as entering your PIN." />
+			android:textSize="@dimen/header_text" android:typeface="serif" 
+			android:layout_height="wrap_content" android:text="About Barada:"/>
 
+		<TextView android:layout_width="wrap_content"
+			android:textSize="@dimen/intro_text"
+			android:layout_height="wrap_content" android:text="@string/about_barada" />
+
+		<TextView android:layout_width="wrap_content"
+			android:textSize="@dimen/header_text"
+			android:layout_height="wrap_content" android:text="Using Barada:" />
+
+		<TextView android:layout_width="wrap_content"
+			android:textSize="@dimen/intro_text"
+			android:autoLink="web"
+			android:layout_height="wrap_content" android:text="@string/using_barada" />
 	</LinearLayout>
+	</ScrollView>
+	
 	<LinearLayout android:orientation="horizontal"
 		android:gravity="bottom" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
