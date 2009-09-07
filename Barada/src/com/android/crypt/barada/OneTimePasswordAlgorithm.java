@@ -89,14 +89,35 @@ public class OneTimePasswordAlgorithm {
 		//        }
 	}
 
+private static byte[] fromHexString(final String encoded) {
+    if ((encoded.length() % 2) != 0)
+        throw new IllegalArgumentException("Input string must contain an even number of characters");
+
+    final byte result[] = new byte[encoded.length()/2];
+    final char enc[] = encoded.toCharArray();
+    for (int i = 0; i < enc.length; i += 2) {
+        StringBuilder curr = new StringBuilder(2);
+        curr.append(enc[i]).append(enc[i + 1]);
+        result[i/2] = (byte) Integer.parseInt(curr.toString(), 16);
+    }
+
+    return result;
+}
+
+	
   private static byte[] getSecretBytes(String secretHex, long pin) {
-    byte[] secret = new byte[(secretHex.length() / 2) + 4];
+//    byte[] secret = new byte[(secretHex.length() / 2) + 4];
 
-    BigInteger bi = new BigInteger(secretHex, 16);
-    byte[] key    = bi.toByteArray();
+//    BigInteger bi = new BigInteger(secretHex, 16);
+//    byte[] key    = bi.toByteArray();
 
-    System.arraycopy(key, 0, secret, 0, key.length);
-    
+//    System.arraycopy(key, 0, secret, 0, key.length);
+
+	byte[] key    = fromHexString(secretHex);
+	byte[] secret = new byte[key.length + 4];  
+	
+	System.arraycopy(key, 0, secret, 0, key.length);                        
+	                             
     for (int j=0;j<4;j++) {
       secret[j + key.length] = (byte)((pin >> ((3 - j) * 8)) & 0xff);
     }

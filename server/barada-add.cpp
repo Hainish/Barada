@@ -40,9 +40,12 @@ using namespace boost;
 using namespace boost::filesystem;
 
 int printUsage(char *name) {
-  fprintf(stderr, "%s <user_name> <pin_number>\n", name);
-  fprintf(stderr, "Where <user_name> is the unix account name.\n");
-  fprintf(stderr, "Where <pin_number> is a multi-digit number.\n");
+  cerr << endl << "You're running barada " << VERSION << endl << endl;
+  
+  cerr << "Usage: " << name << " <user_name> <pin_number>" << endl;
+  cerr << "user_name:\tA system login name." << endl;
+  cerr << "pin_number:\tA multi-digit number." << endl;
+
   return 0;
 }
 

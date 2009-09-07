@@ -1,5 +1,5 @@
 AC_INIT(pam_barada.cpp)
-AM_INIT_AUTOMAKE(barada-pam,0.3)
+AM_INIT_AUTOMAKE(barada-pam,0.4)
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
