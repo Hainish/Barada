@@ -21,7 +21,7 @@
 <string name="enter_profile">Profile Name:</string>
 <string name="profile_add">Add Profile</string>
 <string name="profile_delete">Delete Profile</string>
-<string name="version_name">1.0.3</string>
+<string name="version_name">1.0.4</string>
 <string name="about_barada">Barada is a two-factor authentication system for authenticating users to servers.  Similar to systems like RSA\u0027s SecureID, it allows you to authenticate to servers by combining something you have (your phone) with something you know (your PIN), which generates a unique password each time you log in to a server.  If an attacker sniffs keystrokes from the computer you\u0027re using, or is otherwise able to capture your password in transit, it does them no good.\n</string>
 <string name="using_barada">To use barada, it will also need to be configured on whichever servers you are authenticating to.  If you administer the server yourself, see http://barada.sourceforge.net for information on downloading and installing a Barada PAM module.  Otherwise, contact your administrator about getting Barada credentials.\n\nOnce you have the Barada credentials, all you need to do here is create a profile for that account and enter the 128bit barada key you received from the server.\n\nAccessing that profile using barada\u0027s two-factor authentication from then on is as simple as entering your PIN.\n\nCreate your profile now by clicking the Menu button."</string>
 <string name="use_profile">Enter your PIN:</string>
