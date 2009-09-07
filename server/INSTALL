@@ -33,7 +33,7 @@ should already exist.  Just above the line:
 auth       sufficient   pam_barada.so
 
 This means that when sshd calls out to the PAM stack for
-authorization, the hotp module will be used before the standard
+authorization, the barada module will be used before the standard
 password-based authorization module.  Here we have listed it as
 "sufficient," which means that should the authorization succeed it
 will be considered successful, but if it fails it will continue on
@@ -49,7 +49,7 @@ $ sudo barada-add <username> <pin>
 
 ...where username is the name of the user that you want to have Barada
 access, and pin is an arbitrary-length pin number for that user's
-credentials.  hotpadd should then print a result like:
+credentials.  barada-add should then print a result like:
 
 $ sudo barada-add someUser 1234
 Added someUser with key:
