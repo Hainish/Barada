@@ -5,12 +5,14 @@ import java.security.NoSuchAlgorithmException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /*
  * Copyright (c) 2008 Moxie Marlinspike
@@ -37,7 +39,7 @@ import android.widget.EditText;
 public class ProfileUse extends Activity {
 
   private static final int CODE_LENGTH = 6;
-
+  private Context mContext;
   private EditText pinText;
   private Button generateButton;
 
@@ -46,6 +48,7 @@ public class ProfileUse extends Activity {
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mContext = this;
     helper = new BaradaDatabase(this);
     helper.open();
     setContentView(R.layout.profile_use);
@@ -71,7 +74,14 @@ public class ProfileUse extends Activity {
 	    Cursor profile = helper.getProfile(rowId);
 	    startManagingCursor(profile);
 
-	    long pin     = Long.parseLong(pinText.getText().toString());
+	    long pin     = 0;
+	    try { 
+	    	pin = Long.parseLong(pinText.getText().toString());	    
+	    }
+	    catch( NumberFormatException e ) {
+	    	Toast.makeText(mContext, "That pin is not a valid number", Toast.LENGTH_LONG ).show();
+	    	return;
+	    }
 	    String key   = BaradaDatabase.getKey(profile);
 	    long counter = BaradaDatabase.getCounter(profile);
 	    
