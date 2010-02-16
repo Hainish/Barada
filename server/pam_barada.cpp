@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2008 Moxie Marlinspike
+ * Copyright (c) 2008-2010 Moxie Marlinspike
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
+ * published by the Free Software Foundation; either version 3 of the
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but
@@ -119,7 +119,10 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags,
     pam_syslog(pamh, LOG_EMERG, "HOTP: Unable To Get Login...");
 #endif
     return PAM_USER_UNKNOWN;
+  } else if (login == "..") {
+    return PAM_USER_UNKNOWN;
   }
+
 
 #ifdef DEBUG
   pam_syslog(pamh, LOG_EMERG, ("Got Login: " + login).c_str());

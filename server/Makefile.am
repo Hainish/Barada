@@ -8,7 +8,7 @@ bin_PROGRAMS = barada-add
 
 barada_add_SOURCES = barada-add.cpp HOTPCredentials.cpp Util.cpp
 
-barada_add_LDFLAGS = -lboost_filesystem
+barada_add_LDFLAGS = $(BOOST_FILESYSTEM)
 
 pam_barada_sodir = /lib/security/
 
