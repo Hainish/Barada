@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.ClipboardManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -103,12 +104,20 @@ public class ProfileUse extends Activity {
       .setIcon(R.drawable.icon)
       .setTitle("Generating OTP...")
       .setMessage("Password: " + otp)
-      .setPositiveButton("Thanks!", new DialogInterface.OnClickListener() {
-	  public void onClick(DialogInterface dialog, int whichButton) {
-	    setResult(RESULT_OK);
-	    finish();
-	  }
-	}).create().show();
+      .setNeutralButton("Copy", new DialogInterface.OnClickListener(){
+        public void onClick(DialogInterface dialog, int whichButton){
+          ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+          clipboard.setText(otp);
+          setResult(RESULT_OK);
+          finish();
+        }
+      }).setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int whichButton) {
+          setResult(RESULT_OK);
+          finish();
+        }
+      }).create().show();
+
   }
 
   private Long getRowId(Bundle savedInstanceState) {
